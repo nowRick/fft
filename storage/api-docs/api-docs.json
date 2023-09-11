@@ -1,0 +1,101 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Test Task API Documentation",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/exchange-rate": {
+            "get": {
+                "tags": [
+                    "ExchangeRate"
+                ],
+                "description": "Получение курсов, кроскурсов.",
+                "operationId": "b9208bc3bec305d4ba962227b9997cf1",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/date"
+                    },
+                    {
+                        "$ref": "#/components/parameters/currency"
+                    },
+                    {
+                        "$ref": "#/components/parameters/base_currency"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/ExchangeRateResource"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "responses": {
+            "ExchangeRateResource": {
+                "description": "Успешность выполнения запроса",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "data": {
+                                    "description": "Данные",
+                                    "properties": {
+                                        "exchange_rate": {
+                                            "description": "Значение курса",
+                                            "type": "string",
+                                            "example": "95.35246816142513"
+                                        },
+                                        "difference": {
+                                            "description": "Разница с предыдущим торговым днем",
+                                            "type": "string",
+                                            "example": "0.00425281752521"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "parameters": {
+            "date": {
+                "name": "date",
+                "in": "query",
+                "description": "Дата (dd-mm-YYYY)",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "format": "date"
+                }
+            },
+            "currency": {
+                "name": "currency",
+                "in": "query",
+                "description": "Код валюты в формате ISO 4217 (USD)",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            },
+            "base_currency": {
+                "name": "base_currency",
+                "in": "query",
+                "description": "Код базовой валюты в формате ISO 4217 (RUB)",
+                "schema": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "ExchangeRate",
+            "description": "API эндпоинты курса валют"
+        }
+    ]
+}
